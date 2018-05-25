@@ -1,0 +1,47 @@
+<div class="page-content">
+    <div class="container">
+        <form action="<?= $this->baseUrl("/newsletter/criar") ?>" method="post">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <table class="table table-striped table-bordered table-hover table-sm">
+                        <?php foreach ($this->listaNoticias as $noticia): ?>
+                            <tr>
+                                <td><input type="checkbox" name="noticia[]" value="<?= $noticia->getCodigoPrn() ?>"></td>
+                                <td>
+                                    <a target="_blank" href="<?= $noticia->getLink() ?>">
+                                        <b><?= $noticia->getTitulo() ?></b> <i>por 
+                                            <?php if (!empty($noticia->getAutor())): ?>
+                                                <?= $noticia->getAutor() ?>, 
+                                            <?php endif; ?>
+                                            <?= $noticia->getMedia() ?></i> <i class="fa fa-external-link"></i>
+                                    </a>
+                                    <div class="pull-right small">Categorias: 
+                                        <?php foreach ($noticia->getCategorias() as $categoria): ?>
+                                            <kbd><?= $categoria ?></kbd> 
+                                        <?php endforeach; ?>
+
+                                    </div>
+                                    <div class="small"><?= date("d/m/Y", strtotime($noticia->getDataPublicacao())) ?></div>
+                                    <?= $noticia->getDescricao() ?>
+                                </td>
+
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="pull-left">
+                        <button class="btn btn-default"><i class="fa fa-refresh"></i> Recarregar notícias</button>
+                    </div>
+                    <div class="pull-right">
+                        <button class="btn btn-primary">Criar newsletter <i class="fa fa-newspaper-o"></i></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

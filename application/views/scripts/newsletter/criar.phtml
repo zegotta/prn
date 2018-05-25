@@ -1,0 +1,36 @@
+<div class="page-content">
+    <div class="container">
+        <form class="form-horizontal" action="<?= $this->baseUrl("/newsletter/finalizar") ?>" method="post">
+            <div class="row">
+                <label class="control-label col-md-2">Título</label>
+                <div class="form-group col-md-10">
+                    <input class="form-control input input-sm" placeholder="Insira um título para sua newsletter" name="titulo">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered table-hover table-sm">
+                        <legend>As notícias abaixo foram selecionadas</legend>
+                        <?php foreach ($this->noticias as $noticia): ?>
+                            <tr>
+                                <td>
+                                    <input type="hidden" name="noticia[]" value="<?=$noticia->getId()?>">
+                                    <b><?= $noticia->getTitulo() ?></b>
+                                    <div class="small"><?= date("d/m/Y", strtotime($noticia->getDataPublicacao())) ?></div>
+                                    <?= $noticia->getDescricao() ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="pull-right">
+                        <button class="btn btn-primary">Finalizar newsletter <i class="fa fa-check"></i></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
